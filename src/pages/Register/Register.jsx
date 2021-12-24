@@ -39,7 +39,7 @@ function Register() {
       passwordConfirm,
     };
     try {
-      await axios.post("/auth/register", user);
+      await axios.post("/api/auth/register", user);
       //login
       const payload = await loginRequest(email, password);
       dispatch(login(payload));

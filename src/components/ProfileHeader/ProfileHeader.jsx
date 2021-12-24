@@ -23,7 +23,7 @@ function ProfileHeader({ isCurrentUser, user }) {
   useEffect(() => {
     const fetchCurrentUser = async () => {
       try {
-        const fetchedCurrentUser = await axios.get("/user/current");
+        const fetchedCurrentUser = await axios.get("/api/user/current");
         setFollowed(fetchedCurrentUser.data.following.includes(user?._id));
       } catch (error) {
         console.error(error);
@@ -35,9 +35,9 @@ function ProfileHeader({ isCurrentUser, user }) {
   const handleFollow = async () => {
     try {
       if (!followed) {
-        await axios.put("/user/" + user._id + "/follow");
+        await axios.put("/user/" + user._id + "/api/follow");
       } else {
-        await axios.put("/user/" + user._id + "/unfollow");
+        await axios.put("/user/" + user._id + "/api/unfollow");
       }
       setFollowed(!followed);
     } catch (error) {

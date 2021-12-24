@@ -51,5 +51,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://chalimba-social.herokuapp.com/api"
+  "proxy": "http://localhost:3001"
 }

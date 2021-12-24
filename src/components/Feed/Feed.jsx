@@ -16,7 +16,7 @@ function Feed({ username, type, refetch }) {
 
   const deletePost = async (id) => {
     try {
-      await axios.delete(`/post/${id}`);
+      await axios.delete(`/api/post/${id}`);
       setSuccess("Post has been deleted");
       setLocalRefetch(Date.now());
     } catch (error) {
@@ -30,15 +30,15 @@ function Feed({ username, type, refetch }) {
       try {
         let res;
         if (username) {
-          res = await axios.get(`/post/profile/${username}`);
+          res = await axios.get(`/api/post/profile/${username}`);
         } else if (type === "hearted") {
-          res = await axios.get("/post/liked");
+          res = await axios.get("/api/post/liked");
         } else if (type === "bookmarks") {
-          res = await axios.get("/post/bookmarked");
+          res = await axios.get("/api/post/bookmarked");
         } else if (type === "explore") {
-          res = await axios.get("/post/explore");
+          res = await axios.get("/api/post/explore");
         } else {
-          res = await axios.get("/post/timeline");
+          res = await axios.get("/api/post/timeline");
         }
         setPosts(
           res.data.sort((post1, post2) => {

@@ -28,7 +28,7 @@ function Post({ post, deletePost, own }) {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await axios.get(`/user?userId=${post.userId}`);
+      const res = await axios.get(`/api/user?userId=${post.userId}`);
       setUser(res.data);
     };
     fetchUser();
@@ -44,7 +44,7 @@ function Post({ post, deletePost, own }) {
 
   const likeHandler = () => {
     try {
-      axios.put("/post/" + post._id + "/like");
+      axios.put("/api/post/" + post._id + "/like");
       setLikes(liked ? likes - 1 : likes + 1);
       setLiked(!liked);
     } catch (error) {}
@@ -52,7 +52,7 @@ function Post({ post, deletePost, own }) {
 
   const bookmarkHandler = () => {
     try {
-      axios.put("/post/" + post._id + "/bookmark");
+      axios.put("/api/post/" + post._id + "/bookmark");
       setBookmarked(!bookmarked);
     } catch (error) {}
   };

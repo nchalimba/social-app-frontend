@@ -9,7 +9,7 @@ function useUpdateUser(dependency, setError) {
   useEffect(() => {
     const updateUser = async () => {
       try {
-        const res = await axios.get("/user/current");
+        const res = await axios.get("/api/user/current");
         const { _id, email, username, profilePicture, firstName, lastName } =
           res.data;
         const payload = {

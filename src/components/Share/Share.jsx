@@ -40,14 +40,14 @@ function Share({ handleRefetch }) {
       post.img = `post/${fileName}`;
       try {
         setFile(null);
-        const res = await axios.post("/file", data);
+        const res = await axios.post("/api/file", data);
         console.log(res.data);
       } catch (error) {
         console.error(error);
       }
     }
     try {
-      await axios.post("/post", post);
+      await axios.post("/api/post", post);
       if (handleRefetch) handleRefetch();
     } catch (error) {
       console.error(error);

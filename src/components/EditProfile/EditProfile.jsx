@@ -19,7 +19,7 @@ function EditProfile({ user }) {
   const handleEdit = async (values) => {
     console.log(values);
     try {
-      axios.put(`/user/${user._id}`, values);
+      axios.put(`/api/user/${user._id}`, values);
       setUpdatedUser(values);
       setSuccess("The user has been updated");
     } catch (error) {

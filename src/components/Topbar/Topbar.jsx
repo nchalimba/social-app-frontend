@@ -27,7 +27,7 @@ function Topbar() {
   const handleLogout = async () => {
     try {
       //logout
-      await axios.post("/auth/logout");
+      await axios.post("/api/auth/logout");
       //clear redux state
       dispatch(logout());
     } catch (error) {
