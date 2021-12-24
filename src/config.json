@@ -1,3 +1,3 @@
 {
-  "image_endpoint": "http://localhost:8800/api/file/"
+  "image_endpoint": "http://chalimba-social.herokuapp.com/api/file/"
 }
