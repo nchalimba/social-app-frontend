@@ -1,0 +1,33 @@
+.notFound {
+  height: calc(100vh - 70px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.notFound h1 {
+  font-size: 6rem;
+}
+.notFound div {
+  font-size: 2rem;
+}
+
+@media screen and (max-width: 1200px) {
+  .notFound h1 {
+    font-size: 4rem;
+  }
+  .notFound div {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .notFound h1 {
+    font-size: 1.7rem;
+  }
+  .notFound div {
+    font-size: 1rem;
+  }
+}

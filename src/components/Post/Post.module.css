@@ -1,0 +1,54 @@
+.post {
+  background: var(--color-white);
+  border-radius: var(--card-border-radius);
+  padding: var(--card-padding);
+  margin: 1rem 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+}
+
+.user {
+  display: flex;
+  gap: 1rem;
+}
+
+.photo {
+  border-radius: var(--card-border-radius);
+  overflow: hidden;
+  margin: 0.7rem 0;
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.4rem;
+  margin: 0.6rem;
+}
+.icon {
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.likedBy {
+  font-size: 0.8rem;
+}
+
+.caption {
+  margin: 0.5rem 0;
+}
+
+.hashTag {
+  cursor: pointer;
+  color: rgb(6, 69, 173);
+  transition: all 300ms ease;
+}
+
+.hashTag:hover {
+  opacity: 0.8;
+}

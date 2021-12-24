@@ -1,0 +1,119 @@
+.profileHeader {
+  background: var(--color-white);
+  border-radius: var(--card-border-radius);
+  padding: var(--card-padding);
+  margin: 1rem 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttonsMobile {
+  display: none;
+}
+
+.username {
+  margin-bottom: 0.5rem;
+  margin-right: 1rem;
+}
+.profilePhoto {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.left {
+  display: flex;
+  flex-direction: column;
+  width: min-content;
+  align-items: center;
+  text-align: center;
+  margin-right: 1rem;
+}
+.left h3 {
+  font-weight: normal;
+  font-size: 1.5rem;
+}
+
+.rightHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.followButton {
+  display: flex;
+  align-items: center;
+}
+.button {
+  margin-right: 1rem;
+}
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  width: 70%;
+}
+
+.info {
+  width: 70%;
+}
+
+.info h3 {
+  font-weight: normal;
+  font-size: 1.3rem;
+}
+
+.description {
+  width: 70%;
+}
+
+.icon {
+  margin-right: 1rem;
+  cursor: pointer;
+  transition: all 300ms ease;
+}
+
+.icon:hover {
+  opacity: 0.8;
+}
+.personalInfo {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 10rem 5rem;
+}
+
+@media screen and (max-width: 992px) {
+  .description p {
+    width: 90%;
+  }
+  .rightHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .left h3 {
+    font-size: 1rem;
+    width: 80%;
+  }
+  .info {
+    margin-left: 1rem;
+  }
+  .button {
+    padding: var(--btn-padding-small);
+    margin-right: 1rem;
+  }
+
+  .personalInfo {
+    grid-template-columns: 7rem 5rem;
+  }
+  .description {
+    width: 100%;
+  }
+  .profilePhoto {
+    width: 7rem;
+    height: 7rem;
+  }
+  .buttons {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
