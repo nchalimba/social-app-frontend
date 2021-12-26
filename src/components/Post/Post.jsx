@@ -16,15 +16,19 @@ import MenuItem from "@mui/material/MenuItem";
 import config from "../../config.json";
 import CommentSection from "../CommentSection/CommentSection";
 import { useNavigate } from "react-router-dom";
+import SharePost from "../SharePost/SharePost";
+import Alert from "../../components/misc/Alert";
 
 function Post({ post, deletePost, own, detailed }) {
   const [likes, setLikes] = useState(post.likes.length);
+  const [success, setSuccess] = useState("");
   const [liked, setLiked] = useState(false);
   const [bookmarked, setBookmarked] = useState(false);
   const [user, setUser] = useState({});
   const [anchorElement, setAnchorElement] = useState(null);
   const [searchParams] = useSearchParams();
   const [openComments, setOpenComments] = useState(false);
+  const [openShare, setOpenShare] = useState(false);
   const navigate = useNavigate();
   const openMore = Boolean(anchorElement);
 
@@ -128,9 +132,14 @@ function Post({ post, deletePost, own, detailed }) {
             MenuListProps={{
               "aria-labelledby": "more-button",
             }}
-            style={{ backgroundColor: "inherit" }}
           >
-            <MenuItem onClick={handleDeletePost}>Delete</MenuItem>
+            <MenuItem
+              dense="true"
+              onClick={handleDeletePost}
+              sx={{ margin: 0 }}
+            >
+              Delete
+            </MenuItem>
           </Menu>
         )}
       </div>
@@ -152,13 +161,19 @@ function Post({ post, deletePost, own, detailed }) {
               <FavoriteBorderIcon />
             )}
           </span>
-          <span className={styles.icon}>
+          <span className={styles.icon} onClick={handleViewComments}>
             <ChatBubbleOutlineIcon />
           </span>
-          <span className={styles.icon}>
+          <span className={styles.icon} onClick={() => setOpenShare(true)}>
             <ShareIcon />
           </span>
         </div>
+        <SharePost
+          open={openShare}
+          setOpen={setOpenShare}
+          postId={post._id}
+          setSuccess={setSuccess}
+        />
         <div className={styles.icon} onClick={bookmarkHandler}>
           <span>
             {bookmarked ? (
@@ -187,23 +202,25 @@ function Post({ post, deletePost, own, detailed }) {
       </div>
 
       <div>
-        {post.comments?.length > 0 ? (
+        {post.comments?.length > 0 && (
           <div
             className={`${styles.comments} textMuted`}
             onClick={handleViewComments}
           >
             View all {post.comments.length} comments
           </div>
-        ) : (
-          <div
-            className={`${styles.comments} textMuted`}
-            onClick={handleViewComments}
-          >
-            Create the first comment
-          </div>
         )}
         {detailed && <CommentSection open={openComments} postId={post._id} />}
       </div>
+      {success && (
+        <Alert
+          isOpen={success ? true : false}
+          severity="success"
+          setState={setSuccess}
+        >
+          {success}
+        </Alert>
+      )}
     </div>
   );
 }
