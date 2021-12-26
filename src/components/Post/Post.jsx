@@ -80,7 +80,7 @@ function Post({ post, deletePost, own }) {
                 src={
                   user.profilePicture
                     ? publicFolder + encodeURIComponent(user.profilePicture)
-                    : publicFolder + encodeURIComponent("person/NoAvatar.png")
+                    : publicFolder + encodeURIComponent("profile/NoAvatar.png")
                 }
                 alt=""
               />
