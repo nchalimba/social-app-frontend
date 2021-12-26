@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styles from "./EditProfile.module.css";
 import { Formik } from "formik";
-import useUpdateUser from "../../hooks/useUpdateUser";
 import Alert from "../../components/misc/Alert";
 import axios from "axios";
 import Collapse from "@mui/material/Collapse";
@@ -10,15 +9,19 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import { useDispatch } from "react-redux";
 import { update } from "../../features/user";
+import Loader from "../Loader/Loader";
+import { TrendingUpRounded } from "@mui/icons-material";
 
 function EditProfile({ user }) {
   const [open, setOpen] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState("");
   const dispatch = useDispatch();
 
   const handleEdit = async (values) => {
     console.log(values);
+    setLoading(true);
     values.relationship = parseInt(values.relationship);
     try {
       axios.put(`/api/user/${user._id}`, values);
@@ -27,6 +30,8 @@ function EditProfile({ user }) {
     } catch (error) {
       console.error(error);
       setError(String(error));
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -135,14 +140,12 @@ function EditProfile({ user }) {
                   <option value="3">In a relationship</option>
                 </select>
 
-                <input
-                  type="text"
-                  placeholder="profilePicture"
-                  className="textInput"
-                />
-                <button className="btn btnPrimary" type="submit">
-                  Save
-                </button>
+                <div className={styles.submit}>
+                  <button className="btn btnPrimary" type="submit">
+                    Save
+                  </button>
+                  <Loader loading={loading} />
+                </div>
               </form>
             )}
           </Formik>
