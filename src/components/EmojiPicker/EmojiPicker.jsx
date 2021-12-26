@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Picker, { SKIN_TONE_MEDIUM_DARK } from "emoji-picker-react";
 
 function EmojiPicker({ setChosenEmoji, setOpenEmoji }) {

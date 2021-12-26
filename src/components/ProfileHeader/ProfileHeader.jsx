@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ProfileHeader.module.css";
-import IconButton from "@material-ui/core/IconButton";
-import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
 import { Add } from "@mui/icons-material";
 import { Remove } from "@material-ui/icons";
@@ -14,14 +12,7 @@ import { useDispatch } from "react-redux";
 import Alert from "../../components/misc/Alert";
 import { update } from "../../features/user";
 
-const useStyles = makeStyles((theme) => ({
-  customHoverFocus: {
-    "&:hover, &.Mui-focusVisible": { backgroundColor: "gray" },
-  },
-}));
-
 function ProfileHeader({ isCurrentUser, user }) {
-  const classes = useStyles();
   const publicFolder = config.image_endpoint;
   const [followed, setFollowed] = useState(false);
   const [success, setSuccess] = useState("");
@@ -41,7 +32,7 @@ function ProfileHeader({ isCurrentUser, user }) {
       }
     };
     !isCurrentUser && fetchCurrentUser();
-  }, [currentUser, user?._id]);
+  }, [currentUser, user?._id, isCurrentUser]);
 
   const handleFollow = async () => {
     try {
