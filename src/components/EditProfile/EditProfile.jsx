@@ -10,7 +10,6 @@ import Switch from "@mui/material/Switch";
 import { useDispatch } from "react-redux";
 import { update } from "../../features/user";
 import Loader from "../Loader/Loader";
-import { TrendingUpRounded } from "@mui/icons-material";
 
 function EditProfile({ user }) {
   const [open, setOpen] = useState(false);
