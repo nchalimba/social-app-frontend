@@ -69,6 +69,24 @@ function Feed({ username, type, refetch }) {
           />
         ))
       )}
+      {error && (
+        <Alert
+          isOpen={error ? true : false}
+          severity="error"
+          setState={setError}
+        >
+          {error}
+        </Alert>
+      )}
+      {success && (
+        <Alert
+          isOpen={success ? true : false}
+          severity="success"
+          setState={setSuccess}
+        >
+          {success}
+        </Alert>
+      )}
     </div>
   );
 }
