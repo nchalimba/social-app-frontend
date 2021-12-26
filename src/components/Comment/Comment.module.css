@@ -1,0 +1,14 @@
+.comment {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 1rem;
+}
+
+.right {
+  margin-left: 1rem;
+  width: 80%;
+}
+
+.right span {
+  font-weight: bold;
+}

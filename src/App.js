@@ -14,7 +14,7 @@ import {
 import { useSelector } from "react-redux";
 import NotFound from "./pages/NotFound/NotFound";
 import Register from "./pages/Register/Register";
-import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
+import SinglePost from "./pages/SinglePost/SinglePost";
 
 function App() {
   const theme = useSelector((state) => state.theme.value);
@@ -60,6 +60,10 @@ function App() {
           <Route
             path="/profile/:username"
             element={!user.id ? <Navigate to="/" /> : <Profile />}
+          />
+          <Route
+            path="/post/:id"
+            element={!user.id ? <Navigate to="/" /> : <SinglePost />}
           />
         </Routes>
       </Router>

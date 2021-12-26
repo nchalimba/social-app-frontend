@@ -3,7 +3,6 @@ import Feed from "../../components/Feed/Feed";
 import Leftbar from "../../components/Leftbar/Leftbar";
 import Share from "../../components/Share/Share";
 import styles from "./Home.module.css";
-import { useSelector } from "react-redux";
 
 function Home({ type }) {
   const [refetch, setRefetch] = useState("");

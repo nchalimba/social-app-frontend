@@ -9,22 +9,31 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { format } from "timeago.js";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import config from "../../config.json";
+import CommentSection from "../CommentSection/CommentSection";
+import { useNavigate } from "react-router-dom";
 
-function Post({ post, deletePost, own }) {
+function Post({ post, deletePost, own, detailed }) {
   const [likes, setLikes] = useState(post.likes.length);
   const [liked, setLiked] = useState(false);
   const [bookmarked, setBookmarked] = useState(false);
   const [user, setUser] = useState({});
   const [anchorElement, setAnchorElement] = useState(null);
+  const [searchParams] = useSearchParams();
+  const [openComments, setOpenComments] = useState(false);
+  const navigate = useNavigate();
   const openMore = Boolean(anchorElement);
 
   const publicFolder = config.image_endpoint;
   const currentUser = useSelector((state) => state.user.value);
+
+  useEffect(() => {
+    setOpenComments(JSON.parse(searchParams.get("openComments")));
+  }, [searchParams]);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -70,6 +79,15 @@ function Post({ post, deletePost, own }) {
     deletePost(post._id);
   };
 
+  const handleViewComments = () => {
+    if (detailed) {
+      setOpenComments(!openComments);
+    } else {
+      //TODO: navigate to single post section and open comments
+      navigate({ pathname: `/post/${post._id}`, search: `?openComments=true` });
+    }
+  };
+
   return (
     <div className={styles.post}>
       <div className={styles.head}>
@@ -90,7 +108,8 @@ function Post({ post, deletePost, own }) {
           <div>
             <h3>{user.username}</h3>
             <small>{`${post.location ? `${post.location}, ` : ""}${format(
-              post.createdAt
+              post.createdAt,
+              "en_GB"
             )}`}</small>
           </div>
         </div>
@@ -166,7 +185,25 @@ function Post({ post, deletePost, own }) {
             ))}
         </p>
       </div>
-      <div className="comments textMuted">View all 45 comments</div>
+
+      <div>
+        {post.comments?.length > 0 ? (
+          <div
+            className={`${styles.comments} textMuted`}
+            onClick={handleViewComments}
+          >
+            View all {post.comments.length} comments
+          </div>
+        ) : (
+          <div
+            className={`${styles.comments} textMuted`}
+            onClick={handleViewComments}
+          >
+            Create the first comment
+          </div>
+        )}
+        {detailed && <CommentSection open={openComments} postId={post._id} />}
+      </div>
     </div>
   );
 }

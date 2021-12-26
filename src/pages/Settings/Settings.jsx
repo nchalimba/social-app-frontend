@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Leftbar from "../../components/Leftbar/Leftbar";
 import styles from "./Settings.module.css";
 import { useSelector } from "react-redux";
@@ -13,13 +13,16 @@ function Settings() {
   const dispatch = useDispatch();
   const [isDark, setIsDark] = useState(theme.background === "dark-theme");
 
+  const handleBackgroundChange = useCallback(
+    (value) => {
+      dispatch(changeBackground(value));
+    },
+    [dispatch]
+  );
   useEffect(() => {
     const background = isDark ? "dark-theme" : "light-theme";
     handleBackgroundChange(background);
-  }, [isDark]);
-  const handleBackgroundChange = (value) => {
-    dispatch(changeBackground(value));
-  };
+  }, [isDark, handleBackgroundChange]);
   const handleColorChange = (value) => {
     dispatch(changeColor(value));
   };

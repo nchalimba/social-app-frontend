@@ -17,13 +17,11 @@ function Register() {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleClick = async (e) => {
     setError(null);
-    setLoading(true);
     e.preventDefault();
     if (password !== passwordConfirm) {
       setError("Passwords don't match");

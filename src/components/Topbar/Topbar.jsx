@@ -11,6 +11,7 @@ import { linkStyle } from "../../utils/Styles";
 import axios from "axios";
 import { logout } from "../../features/user";
 import config from "../../config.json";
+import Alert from "../../components/misc/Alert";
 
 function Topbar() {
   const theme = useSelector((state) => state.theme.value);
@@ -81,6 +82,15 @@ function Topbar() {
           </div>
         </div>
       </div>
+      {error && (
+        <Alert
+          isOpen={error ? true : false}
+          severity="error"
+          setState={setError}
+        >
+          {error}
+        </Alert>
+      )}
     </div>
   );
 }
