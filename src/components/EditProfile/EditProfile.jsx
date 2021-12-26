@@ -8,19 +8,21 @@ import Collapse from "@mui/material/Collapse";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
+import { useDispatch } from "react-redux";
+import { update } from "../../features/user";
 
 function EditProfile({ user }) {
   const [open, setOpen] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const [updatedUser, setUpdatedUser] = useState(user);
-  useUpdateUser(updatedUser, setError);
+  const dispatch = useDispatch();
 
   const handleEdit = async (values) => {
     console.log(values);
+    values.relationship = parseInt(values.relationship);
     try {
       axios.put(`/api/user/${user._id}`, values);
-      setUpdatedUser(values);
+      dispatch(update(values));
       setSuccess("The user has been updated");
     } catch (error) {
       console.error(error);
@@ -106,7 +108,6 @@ function EditProfile({ user }) {
                   type="text"
                   placeholder="City"
                   className="textInput"
-                  name=""
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.city}
