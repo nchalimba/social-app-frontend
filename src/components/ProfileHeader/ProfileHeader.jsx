@@ -35,9 +35,9 @@ function ProfileHeader({ isCurrentUser, user }) {
   const handleFollow = async () => {
     try {
       if (!followed) {
-        await axios.put("/user/" + user._id + "/api/follow");
+        await axios.put("/api/user/" + user._id + "/follow");
       } else {
-        await axios.put("/user/" + user._id + "/api/unfollow");
+        await axios.put("/api/user/" + user._id + "/unfollow");
       }
       setFollowed(!followed);
     } catch (error) {
@@ -49,21 +49,43 @@ function ProfileHeader({ isCurrentUser, user }) {
       <div>
         <div className={styles.left}>
           <div className={styles.profilePhoto}>
-            <img
-              src={
-                user.profilePicture
-                  ? publicFolder + encodeURIComponent(user.profilePicture)
-                  : publicFolder + encodeURIComponent("person/NoAvatar.png")
-              }
-              alt=""
-            />
+            {isCurrentUser ? (
+              <img
+                src={
+                  user.profilePicture
+                    ? publicFolder +
+                      encodeURIComponent(currentUser.profilePicture)
+                    : publicFolder + encodeURIComponent("person/NoAvatar.png")
+                }
+                alt=""
+              />
+            ) : (
+              <img
+                src={
+                  user.profilePicture
+                    ? publicFolder + encodeURIComponent(user.profilePicture)
+                    : publicFolder + encodeURIComponent("person/NoAvatar.png")
+                }
+                alt=""
+              />
+            )}
           </div>
-          <h3>{`${user.firstName} ${user.lastName}`}</h3>
+          {isCurrentUser ? (
+            <h3>{`${currentUser.firstName} ${currentUser.lastName}`}</h3>
+          ) : (
+            <h3>{`${user.firstName} ${user.lastName}`}</h3>
+          )}
         </div>
       </div>
       <div className={styles.info}>
         <div className={styles.rightHeader}>
-          <h3 className={`${styles.username} textMuted`}>@{user.username}</h3>
+          {isCurrentUser ? (
+            <h3 className={`${styles.username} textMuted`}>
+              @{currentUser.username}
+            </h3>
+          ) : (
+            <h3 className={`${styles.username} textMuted`}>@{user.username}</h3>
+          )}
           {!isCurrentUser && (
             <>
               <div className={styles.buttons}>
@@ -84,23 +106,47 @@ function ProfileHeader({ isCurrentUser, user }) {
           <p>{user.followers?.length} followers</p>
         </div>
         <div className={styles.description}>
-          <p>{user.description}</p>
+          {isCurrentUser ? (
+            <p>{currentUser.description}</p>
+          ) : (
+            <p>{user.description}</p>
+          )}
         </div>
         <div className={styles.personalInfo}>
           <h4>City</h4>
-          <p>{user.city || "-"}</p>
-          <h4>From</h4>
-          <p>{user.from || "-"}</p>
+          {isCurrentUser ? (
+            <p>{currentUser.city || "-"}</p>
+          ) : (
+            <p>{user.city || "-"}</p>
+          )}
+          <h4>Country</h4>
+          {isCurrentUser ? (
+            <p>{currentUser.country || "-"}</p>
+          ) : (
+            <p>{user.country || "-"}</p>
+          )}
           <h4>Relationship</h4>
-          <p>
-            {user.relationship === 1
-              ? "Married"
-              : user.relationship === 2
-              ? "Single"
-              : user.relationship === 3
-              ? "In a relationship"
-              : "-"}
-          </p>
+          {isCurrentUser ? (
+            <p>
+              {currentUser.relationship === 1
+                ? "Married"
+                : currentUser.relationship === 2
+                ? "Single"
+                : currentUser.relationship === 3
+                ? "In a relationship"
+                : "Not specified"}
+            </p>
+          ) : (
+            <p>
+              {user.relationship === 1
+                ? "Married"
+                : user.relationship === 2
+                ? "Single"
+                : user.relationship === 3
+                ? "In a relationship"
+                : "Not specified"}
+            </p>
+          )}
         </div>
       </div>
     </div>
