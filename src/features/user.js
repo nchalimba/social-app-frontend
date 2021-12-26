@@ -8,6 +8,10 @@ const initialStateValue = {
   profilePicture: "",
   firstName: "",
   lastName: "",
+  description: "",
+  city: "",
+  country: "",
+  relationship: null,
 };
 export const userSlice = createSlice({
   name: "user",
@@ -19,9 +23,12 @@ export const userSlice = createSlice({
     logout: (state) => {
       state.value = initialStateValue;
     },
+    update: (state, action) => {
+      state.value = { ...state.value, ...action.payload };
+    },
   },
 });
 
-export const { login, logout } = userSlice.actions;
+export const { login, logout, update } = userSlice.actions;
 
 export default userSlice.reducer;
