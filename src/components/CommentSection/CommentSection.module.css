@@ -6,6 +6,7 @@
   background: var(--color-light);
   border-radius: var(--border-radius);
   margin: 1rem 0;
+  padding: var(--search-padding);
 }
 .create input[type="text"] {
   width: 100%;
