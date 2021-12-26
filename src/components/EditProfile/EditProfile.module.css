@@ -25,6 +25,13 @@
   grid-column-start: 2;
 }
 
+.submit {
+  display: flex;
+  align-items: center;
+
+  justify-content: space-between;
+}
+
 @media screen and (max-width: 992px) {
   .formContainer {
     grid-template-columns: 1fr;

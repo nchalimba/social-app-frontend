@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { login } from "../features/user";
+import { update } from "../features/user";
+import lodash from "lodash";
 
 function useUpdateUser(dependency, setError) {
   const dispatch = useDispatch();
@@ -10,17 +11,14 @@ function useUpdateUser(dependency, setError) {
     const updateUser = async () => {
       try {
         const res = await axios.get("/api/user/current");
-        const { _id, email, username, profilePicture, firstName, lastName } =
-          res.data;
-        const payload = {
-          id: _id,
-          username,
-          email,
-          profilePicture,
-          firstName,
-          lastName,
-        };
-        dispatch(login(payload));
+        const userData = lodash.omit(
+          res.data,
+          "followers",
+          "following",
+          "isAdmin",
+          "updatedAt"
+        );
+        dispatch(update({ id: userData._id, ...lodash.omit(userData, "_id") }));
       } catch (error) {
         console.error(error);
         setError(String(error));
