@@ -1,12 +1,11 @@
 .settings {
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 5rem);
   display: grid;
   grid-template-columns: 18vw auto 20vw;
   column-gap: 2rem;
   position: relative;
 }
 .theme {
-  margin-top: 1rem;
   background: var(--color-white);
   text-align: center;
   display: grid;

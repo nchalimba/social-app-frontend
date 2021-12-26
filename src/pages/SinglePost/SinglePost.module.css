@@ -1,5 +1,5 @@
 .singlePost {
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 5rem);
   display: grid;
   grid-template-columns: 18vw auto 20vw;
   column-gap: 2rem;
