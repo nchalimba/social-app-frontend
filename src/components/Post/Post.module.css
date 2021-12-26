@@ -52,3 +52,7 @@
 .hashTag:hover {
   opacity: 0.8;
 }
+
+.comments {
+  cursor: pointer;
+}

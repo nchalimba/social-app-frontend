@@ -1,0 +1,23 @@
+.create {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  background: var(--color-light);
+  border-radius: var(--border-radius);
+  margin: 1rem 0;
+}
+.create input[type="text"] {
+  width: 100%;
+  justify-self: start;
+  background-color: transparent;
+  padding: 0.3rem 0 0.3rem 1rem;
+  color: var(--color-dark);
+  margin-right: 1rem;
+  font-size: 0.9rem;
+}
+@media screen and (max-width: 992px) {
+  .create {
+    width: 100%;
+  }
+}
