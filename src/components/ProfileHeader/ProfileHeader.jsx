@@ -7,6 +7,12 @@ import { Add } from "@mui/icons-material";
 import { Remove } from "@material-ui/icons";
 import axios from "axios";
 import config from "../../config.json";
+import EditIcon from "@mui/icons-material/Edit";
+import CheckIcon from "@mui/icons-material/Check";
+import CloseIcon from "@mui/icons-material/Close";
+import { useDispatch } from "react-redux";
+import Alert from "../../components/misc/Alert";
+import { update } from "../../features/user";
 
 const useStyles = makeStyles((theme) => ({
   customHoverFocus: {
@@ -18,7 +24,12 @@ function ProfileHeader({ isCurrentUser, user }) {
   const classes = useStyles();
   const publicFolder = config.image_endpoint;
   const [followed, setFollowed] = useState(false);
+  const [success, setSuccess] = useState("");
+  const [error, setError] = useState("");
+
   const currentUser = useSelector((state) => state.user.value);
+  const [profilePicture, setProfilePicture] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchCurrentUser = async () => {
@@ -44,32 +55,88 @@ function ProfileHeader({ isCurrentUser, user }) {
       console.error(error);
     }
   };
+
+  const handleChangeProfilePicture = async () => {
+    try {
+      //upload file
+      const data = new FormData();
+      const fileName = Date.now() + profilePicture.name;
+      data.append("name", fileName);
+      data.append("file", profilePicture);
+      data.append("folder", "profile");
+      await axios.post("/api/file", data);
+      //change user data
+      const userPayload = { profilePicture: `profile/${fileName}` };
+      await axios.put(`/api/user/${currentUser.id}`, userPayload);
+
+      //change user state
+      dispatch(update(userPayload));
+      setProfilePicture(null);
+      //alert
+      setSuccess("Profile image updated");
+    } catch (error) {
+      console.error(error);
+      setError(error);
+    }
+  };
   return (
     <div className={styles.profileHeader}>
       <div>
         <div className={styles.left}>
           <div className={styles.profilePhoto}>
-            {isCurrentUser ? (
+            {isCurrentUser && !profilePicture ? (
               <img
                 src={
-                  user.profilePicture
+                  currentUser.profilePicture
                     ? publicFolder +
                       encodeURIComponent(currentUser.profilePicture)
-                    : publicFolder + encodeURIComponent("person/NoAvatar.png")
+                    : publicFolder + encodeURIComponent("profile/NoAvatar.png")
                 }
                 alt=""
               />
+            ) : isCurrentUser && profilePicture ? (
+              <img src={URL.createObjectURL(profilePicture)} alt="" />
             ) : (
               <img
                 src={
                   user.profilePicture
                     ? publicFolder + encodeURIComponent(user.profilePicture)
-                    : publicFolder + encodeURIComponent("person/NoAvatar.png")
+                    : publicFolder + encodeURIComponent("profile/NoAvatar.png")
                 }
                 alt=""
               />
             )}
           </div>
+          {isCurrentUser && (
+            <form action="" className={styles.editPictureForm}>
+              <label htmlFor="file">
+                <span className={styles.icon}>
+                  <EditIcon />
+                </span>
+                <input
+                  style={{ display: "none" }}
+                  type="file"
+                  id="file"
+                  accept=".png,.jpeg,.jpg"
+                  onChange={(e) => setProfilePicture(e.target.files[0])}
+                />
+              </label>
+            </form>
+          )}
+          {profilePicture && (
+            <div className={styles.pictureConfirm}>
+              <CheckIcon
+                color="success"
+                className={styles.icon}
+                onClick={handleChangeProfilePicture}
+              />
+              <CloseIcon
+                color="error"
+                className={styles.icon}
+                onClick={() => setProfilePicture(null)}
+              />
+            </div>
+          )}
           {isCurrentUser ? (
             <h3>{`${currentUser.firstName} ${currentUser.lastName}`}</h3>
           ) : (
@@ -149,6 +216,24 @@ function ProfileHeader({ isCurrentUser, user }) {
           )}
         </div>
       </div>
+      {error && (
+        <Alert
+          isOpen={error ? true : false}
+          severity="error"
+          setState={setError}
+        >
+          {error}
+        </Alert>
+      )}
+      {success && (
+        <Alert
+          isOpen={success ? true : false}
+          severity="success"
+          setState={setSuccess}
+        >
+          {success}
+        </Alert>
+      )}
     </div>
   );
 }
