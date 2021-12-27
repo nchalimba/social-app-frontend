@@ -103,7 +103,7 @@ function Share({ handleRefetch }) {
             />
           </label>
 
-          <input type="submit" value="Post" className="btn btnPrimary" />
+          <input type="submit" value="POST" className="btn btnPrimary" />
         </div>
         <div className={styles.fileSection}>
           {file && (

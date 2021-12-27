@@ -11,6 +11,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch } from "react-redux";
 import Alert from "../../components/misc/Alert";
 import { update } from "../../features/user";
+import Divider from "@mui/material/Divider";
+import Button from "@mui/material/Button";
 
 function ProfileHeader({ isCurrentUser, user }) {
   const publicFolder = config.image_endpoint;
@@ -145,18 +147,23 @@ function ProfileHeader({ isCurrentUser, user }) {
             <h3 className={`${styles.username} textMuted`}>@{user.username}</h3>
           )}
           {!isCurrentUser && (
-            <>
-              <div className={styles.buttons}>
-                <div className={`btn btnPrimary ${styles.button}`}>Message</div>
-                <div
-                  className={`btn btnPrimary ${styles.button} ${styles.followButton}`}
-                  onClick={handleFollow}
-                >
-                  {followed ? "Unfollow" : "Follow"}
-                  {followed ? <Remove /> : <Add />}
-                </div>
-              </div>
-            </>
+            <div className={styles.followButton}>
+              <Button
+                style={{ borderRadius: 50, background: "inherit" }}
+                color="inherit"
+                variant="text"
+                startIcon={
+                  followed ? (
+                    <CloseIcon color="error" />
+                  ) : (
+                    <Add color="success" />
+                  )
+                }
+                onClick={handleFollow}
+              >
+                {followed ? "Unfollow" : "Follow"}
+              </Button>
+            </div>
           )}
         </div>
         <div className={styles.personalInfo}>

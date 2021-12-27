@@ -41,13 +41,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: var(--color-dark);
 }
 .followButton {
-  display: flex;
-  align-items: center;
+  border-radius: 50%;
 }
 .button {
   margin-right: 1rem;
+  padding: var(--btn-padding-small);
 }
 .buttons {
   display: flex;
