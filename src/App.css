@@ -51,6 +51,13 @@
   color: hsl(252, 30%, 95%);
 }
 
+.modalInputDark {
+  background-color: hsl(252, 30%, 0%) !important;
+}
+.modalInputLight {
+  background-color: hsl(252, 30%, 95%) !important;
+}
+
 :root {
   --color-gray: hsl(252, 15%, 65%);
   --color-secondary: hsl(252, 100%, 90%);
@@ -190,8 +197,13 @@ textarea {
   color: var(--color-gray);
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1024px) {
   .container {
     width: 96%;
+  }
+}
+@media screen and (max-width: 480px) {
+  .App {
+    padding-bottom: 4rem;
   }
 }

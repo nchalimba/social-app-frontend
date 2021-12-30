@@ -43,6 +43,8 @@ The app contains following functionality:
 - Delete own posts
 - Mark post with a heart
 - Bookmark post
+- Create and view comments of a post
+- View individual posts
 
 ### Feed
 
@@ -66,8 +68,6 @@ The following features will be implemented in the future:
 
 ### Post
 
-- Creating and viewing comments on posts
-- View individual post
 - Share post (link and social share)
 
 ### Messaging

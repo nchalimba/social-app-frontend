@@ -58,7 +58,7 @@ function CommentSection({ open, postId }) {
           />
           <input
             type="submit"
-            value="Post"
+            value="POST"
             className="btn-small btn btnPrimary"
           />
         </form>

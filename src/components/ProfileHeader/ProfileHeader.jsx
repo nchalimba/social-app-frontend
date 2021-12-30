@@ -11,6 +11,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch } from "react-redux";
 import Alert from "../../components/misc/Alert";
 import { update } from "../../features/user";
+import Divider from "@mui/material/Divider";
+import Button from "@mui/material/Button";
 
 function ProfileHeader({ isCurrentUser, user }) {
   const publicFolder = config.image_endpoint;
@@ -74,9 +76,10 @@ function ProfileHeader({ isCurrentUser, user }) {
     <div className={styles.profileHeader}>
       <div>
         <div className={styles.left}>
-          <div className={styles.profilePhoto}>
+          <div className={styles.pictureContainer}>
             {isCurrentUser && !profilePicture ? (
               <img
+                className={styles.profilePhoto}
                 src={
                   currentUser.profilePicture
                     ? publicFolder +
@@ -86,9 +89,14 @@ function ProfileHeader({ isCurrentUser, user }) {
                 alt=""
               />
             ) : isCurrentUser && profilePicture ? (
-              <img src={URL.createObjectURL(profilePicture)} alt="" />
+              <img
+                className={styles.profilePhoto}
+                src={URL.createObjectURL(profilePicture)}
+                alt=""
+              />
             ) : (
               <img
+                className={styles.profilePhoto}
                 src={
                   user.profilePicture
                     ? publicFolder + encodeURIComponent(user.profilePicture)
@@ -97,37 +105,37 @@ function ProfileHeader({ isCurrentUser, user }) {
                 alt=""
               />
             )}
-          </div>
-          {isCurrentUser && (
-            <form action="" className={styles.editPictureForm}>
-              <label htmlFor="file">
-                <span className={styles.icon}>
-                  <EditIcon />
-                </span>
-                <input
-                  style={{ display: "none" }}
-                  type="file"
-                  id="file"
-                  accept=".png,.jpeg,.jpg"
-                  onChange={(e) => setProfilePicture(e.target.files[0])}
+            {isCurrentUser && (
+              <form action="" className={styles.editPictureForm}>
+                <label htmlFor="file">
+                  <span className={styles.icon}>
+                    <EditIcon />
+                  </span>
+                  <input
+                    style={{ display: "none" }}
+                    type="file"
+                    id="file"
+                    accept=".png,.jpeg,.jpg"
+                    onChange={(e) => setProfilePicture(e.target.files[0])}
+                  />
+                </label>
+              </form>
+            )}
+            {profilePicture && (
+              <div className={styles.pictureConfirm}>
+                <CheckIcon
+                  color="success"
+                  className={styles.icon}
+                  onClick={handleChangeProfilePicture}
                 />
-              </label>
-            </form>
-          )}
-          {profilePicture && (
-            <div className={styles.pictureConfirm}>
-              <CheckIcon
-                color="success"
-                className={styles.icon}
-                onClick={handleChangeProfilePicture}
-              />
-              <CloseIcon
-                color="error"
-                className={styles.icon}
-                onClick={() => setProfilePicture(null)}
-              />
-            </div>
-          )}
+                <CloseIcon
+                  color="error"
+                  className={styles.icon}
+                  onClick={() => setProfilePicture(null)}
+                />
+              </div>
+            )}
+          </div>
           {isCurrentUser ? (
             <h3>{`${currentUser.firstName} ${currentUser.lastName}`}</h3>
           ) : (
@@ -145,18 +153,23 @@ function ProfileHeader({ isCurrentUser, user }) {
             <h3 className={`${styles.username} textMuted`}>@{user.username}</h3>
           )}
           {!isCurrentUser && (
-            <>
-              <div className={styles.buttons}>
-                <div className={`btn btnPrimary ${styles.button}`}>Message</div>
-                <div
-                  className={`btn btnPrimary ${styles.button} ${styles.followButton}`}
-                  onClick={handleFollow}
-                >
-                  {followed ? "Unfollow" : "Follow"}
-                  {followed ? <Remove /> : <Add />}
-                </div>
-              </div>
-            </>
+            <div className={styles.followButton}>
+              <Button
+                style={{ borderRadius: 50, background: "inherit" }}
+                color="inherit"
+                variant="text"
+                startIcon={
+                  followed ? (
+                    <CloseIcon color="error" />
+                  ) : (
+                    <Add color="success" />
+                  )
+                }
+                onClick={handleFollow}
+              >
+                {followed ? "Unfollow" : "Follow"}
+              </Button>
+            </div>
           )}
         </div>
         <div className={styles.personalInfo}>
