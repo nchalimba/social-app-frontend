@@ -1,0 +1,59 @@
+.input {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.shareDialog {
+  height: 100%;
+  position: relative;
+}
+
+.button {
+  position: absolute;
+  bottom: 1rem;
+  font-size: 1.2rem;
+  right: 0;
+  margin-right: 2rem;
+}
+
+.fileSection {
+  max-height: 80%;
+  margin-top: 2rem;
+
+  display: flex;
+  justify-content: center;
+}
+.fileContainer {
+  position: relative;
+  width: fit-content;
+}
+.cancelIcon {
+  position: absolute;
+  top: -0.75rem;
+  right: -0.75rem;
+}
+
+.img {
+  border-radius: 1rem;
+  max-height: 20rem;
+  object-fit: scale-down;
+}
+.form {
+  height: 80%;
+  padding: 2rem;
+}
+
+.icons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+}
+.header h3 {
+  margin-left: 2rem;
+  font-family: "Poppins", sans-serif;
+}
