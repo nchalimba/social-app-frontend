@@ -6,6 +6,6 @@ export const linkStyle = {
 export const iconStyle = {
   fontSize: "1.4rem",
   color: "var(--color-gray)",
-  marginLeft: "2rem",
+  marginLeft: "0rem",
   position: "relative",
 };
