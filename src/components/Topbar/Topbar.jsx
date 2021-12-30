@@ -5,6 +5,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import BookmarksIcon from "@mui/icons-material/Bookmarks";
 import SendIcon from "@mui/icons-material/Send";
 import SettingsIcon from "@mui/icons-material/Settings";
+import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { linkStyle } from "../../utils/Styles";
@@ -12,6 +13,7 @@ import axios from "axios";
 import { logout } from "../../features/user";
 import config from "../../config.json";
 import Alert from "../../components/misc/Alert";
+import ShareDialog from "../ShareDialog/ShareDialog";
 
 function Topbar() {
   const theme = useSelector((state) => state.theme.value);
@@ -19,6 +21,9 @@ function Topbar() {
   const publicFolder = config.image_endpoint;
 
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [openShare, setOpenShare] = useState(false);
+
   const dispatch = useDispatch();
   const logoUrl =
     theme.background === "light-theme"
@@ -35,6 +40,13 @@ function Topbar() {
       console.error(error);
       setError(String(error));
     }
+  };
+
+  const handlePost = () => {
+    //set modal open
+    //show post
+    //onClick: refresh page
+    //then close
   };
   return (
     <div className={styles.navWrapper}>
@@ -58,6 +70,13 @@ function Topbar() {
           <span className={styles.icon}>
             <SendIcon />
           </span>
+
+          <div onClick={() => setOpenShare(true)} className={styles.postIcon}>
+            <span className={`${styles.icon}`}>
+              <AddBoxOutlinedIcon />
+            </span>
+          </div>
+
           <Link to={`/profile/${user.username}`} style={linkStyle}>
             <div className="profilePhoto">
               <img
@@ -70,13 +89,15 @@ function Topbar() {
               />
             </div>
           </Link>
-          <Link to="/settings" style={linkStyle}>
-            <span className={styles.icon}>
+
+          <span className={styles.icon}>
+            <Link to="/settings" style={linkStyle}>
               <SettingsIcon />
-            </span>
-          </Link>
+            </Link>
+          </span>
+
           <div onClick={handleLogout}>
-            <span className={styles.icon}>
+            <span className={`${styles.logoutIcon} ${styles.icon}`}>
               <LogoutIcon />
             </span>
           </div>
@@ -91,6 +112,11 @@ function Topbar() {
           {error}
         </Alert>
       )}
+      <ShareDialog
+        open={openShare}
+        setOpen={setOpenShare}
+        setSuccess={setSuccess}
+      />
     </div>
   );
 }

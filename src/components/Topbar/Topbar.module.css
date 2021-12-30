@@ -31,13 +31,33 @@
 .icon:hover {
   opacity: 0.8;
 }
+
+.postIcon {
+  display: none;
+}
+
 .logo:hover {
   opacity: 0.8;
   transition: all 300ms ease;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 768px) {
   .searchBar {
     display: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .icon {
+    display: none;
+  }
+  .logoutIcon {
+    display: block;
+  }
+  .postIcon {
+    display: block;
+  }
+  .postIcon .icon {
+    display: block;
   }
 }
