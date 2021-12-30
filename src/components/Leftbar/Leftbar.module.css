@@ -23,6 +23,7 @@
 .sidebar .menuItem {
   display: flex;
   align-items: center;
+  padding-left: 2rem;
   height: 4rem;
   cursor: pointer;
   transition: all 300ms ease;
@@ -67,6 +68,7 @@
   width: 0.5rem;
   height: 100%;
   position: absolute;
+  left: 0;
   background: var(--color-primary);
 }
 
@@ -80,7 +82,7 @@
   overflow: hidden;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1024px) {
   .leftbar {
     width: 5rem;
     z-index: 5;
@@ -92,11 +94,43 @@
     display: none;
   }
 }
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 768px) {
   .leftbar {
     grid-column: 3/4; /*From 3 to 4*/
     position: fixed;
     bottom: 0;
     right: 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .sidebar {
+    display: flex;
+    border-radius: 0;
+    justify-content: space-around;
+  }
+  .leftbar {
+    top: auto;
+    width: 100vw;
+    flex-direction: column;
+  }
+  .firstItem.active,
+  .lastItem.active {
+    border-radius: 0;
+  }
+
+  .sidebar .active::before {
+    display: none;
+  }
+
+  .sidebar .menuItem {
+    padding: 0;
+  }
+  .active {
+    background: var(--color-white) !important;
+  }
+  .icon {
+    margin: 0;
+    padding: 0;
   }
 }

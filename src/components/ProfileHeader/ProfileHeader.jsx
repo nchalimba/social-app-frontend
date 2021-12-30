@@ -76,9 +76,10 @@ function ProfileHeader({ isCurrentUser, user }) {
     <div className={styles.profileHeader}>
       <div>
         <div className={styles.left}>
-          <div className={styles.profilePhoto}>
+          <div className={styles.pictureContainer}>
             {isCurrentUser && !profilePicture ? (
               <img
+                className={styles.profilePhoto}
                 src={
                   currentUser.profilePicture
                     ? publicFolder +
@@ -88,9 +89,14 @@ function ProfileHeader({ isCurrentUser, user }) {
                 alt=""
               />
             ) : isCurrentUser && profilePicture ? (
-              <img src={URL.createObjectURL(profilePicture)} alt="" />
+              <img
+                className={styles.profilePhoto}
+                src={URL.createObjectURL(profilePicture)}
+                alt=""
+              />
             ) : (
               <img
+                className={styles.profilePhoto}
                 src={
                   user.profilePicture
                     ? publicFolder + encodeURIComponent(user.profilePicture)
@@ -99,37 +105,37 @@ function ProfileHeader({ isCurrentUser, user }) {
                 alt=""
               />
             )}
-          </div>
-          {isCurrentUser && (
-            <form action="" className={styles.editPictureForm}>
-              <label htmlFor="file">
-                <span className={styles.icon}>
-                  <EditIcon />
-                </span>
-                <input
-                  style={{ display: "none" }}
-                  type="file"
-                  id="file"
-                  accept=".png,.jpeg,.jpg"
-                  onChange={(e) => setProfilePicture(e.target.files[0])}
+            {isCurrentUser && (
+              <form action="" className={styles.editPictureForm}>
+                <label htmlFor="file">
+                  <span className={styles.icon}>
+                    <EditIcon />
+                  </span>
+                  <input
+                    style={{ display: "none" }}
+                    type="file"
+                    id="file"
+                    accept=".png,.jpeg,.jpg"
+                    onChange={(e) => setProfilePicture(e.target.files[0])}
+                  />
+                </label>
+              </form>
+            )}
+            {profilePicture && (
+              <div className={styles.pictureConfirm}>
+                <CheckIcon
+                  color="success"
+                  className={styles.icon}
+                  onClick={handleChangeProfilePicture}
                 />
-              </label>
-            </form>
-          )}
-          {profilePicture && (
-            <div className={styles.pictureConfirm}>
-              <CheckIcon
-                color="success"
-                className={styles.icon}
-                onClick={handleChangeProfilePicture}
-              />
-              <CloseIcon
-                color="error"
-                className={styles.icon}
-                onClick={() => setProfilePicture(null)}
-              />
-            </div>
-          )}
+                <CloseIcon
+                  color="error"
+                  className={styles.icon}
+                  onClick={() => setProfilePicture(null)}
+                />
+              </div>
+            )}
+          </div>
           {isCurrentUser ? (
             <h3>{`${currentUser.firstName} ${currentUser.lastName}`}</h3>
           ) : (

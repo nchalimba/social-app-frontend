@@ -20,8 +20,8 @@
 .profilePhoto {
   width: 10rem;
   height: 10rem;
+  object-fit: cover;
   border-radius: 50%;
-  overflow: hidden;
 }
 .left {
   display: flex;
@@ -142,5 +142,34 @@
   .editPictureForm {
     top: 0;
     right: 0;
+  }
+}
+@media screen and (max-width: 480px) {
+  .profileHeader {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0;
+  }
+
+  .left {
+    flex-direction: row;
+    margin-bottom: 1rem;
+    margin-right: 0;
+  }
+
+  .profilePhoto {
+    width: 5rem;
+    height: 5rem;
+  }
+  .editPictureForm {
+    left: -0.5rem;
+    top: -0.5rem;
+  }
+
+  .pictureContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 1rem;
   }
 }
