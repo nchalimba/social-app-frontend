@@ -1,2 +1,2 @@
-/api/* https://chalimba-social.glitch.me/api/:splat 200
+/api/* https://social-app.api.abubeker.com/api/:splat 200
 /* /index.html 200
