@@ -2,7 +2,7 @@
 
 ## Description
 
-This is the frontend of my social media application. To visit the demo, go to https://chalimba-social.netlify.app/. There you can either create a new account or log in with the following test account:
+This is the frontend of my social media application. To visit the demo, go to https://social-app.abubeker.com/. There you can either create a new account or log in with the following test account:
 
 - Username: jane@doe.com
 - Password: test1234
